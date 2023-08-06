@@ -619,16 +619,12 @@ def get_center(model, eval_dataloader, post_process_class):
     return char_center
 
 
-def preprocess(image_path, is_train=False):
-    # FLAGS = ArgsParser().parse_args()
-    profiler_options = None
-    config = load_config('./configs/kie/vi_layoutxlm/ser_mcocr.yml')
-    opt = {
-        'Architecture.Backbone.checkpoints': './output/kie-okono/best_accuracy', 
-        'Global.infer_img': image_path
-    }
-    config = merge_config(config, opt)
-    profile_dic = {"profiler_options": None}
+def preprocess(is_train=False):
+    FLAGS = ArgsParser().parse_args()
+    profiler_options = FLAGS.profiler_options
+    config = load_config(FLAGS.config)
+    config = merge_config(config, FLAGS.opt)
+    profile_dic = {"profiler_options": FLAGS.profiler_options}
     config = merge_config(config, profile_dic)
 
     if is_train:
