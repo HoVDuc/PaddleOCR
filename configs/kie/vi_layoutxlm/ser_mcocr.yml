@@ -64,7 +64,7 @@ Train:
     name: SimpleDataSet
     data_dir: train_data/MC-OCR/train/image
     label_file_list: 
-      - train_data/MC-OCR/train/train.json
+      - train_data/MC-OCR/train/train.txt
     ratio_list: [ 1.0 ]
     transforms:
       - DecodeImage: # load image
@@ -103,7 +103,7 @@ Eval:
     name: SimpleDataSet
     data_dir: train_data/MC-OCR/valid/image
     label_file_list:
-      - train_data/MC-OCR/valid/valid.json
+      - train_data/MC-OCR/valid/valid.txt
     transforms:
       - DecodeImage: # load image
           img_mode: RGB
