@@ -14,11 +14,11 @@ Global:
   use_visualdl: False
   infer_img: doc/imgs_words/ch/word_1.jpg
   # for data or label process
-  character_dict_path:
-  max_text_length: 25
+  character_dict_path: ./ppocr/utils/vi_dict.txt
+  max_text_length: 64
   num_heads: 8
   infer_mode: False
-  use_space_char: False
+  use_space_char: True
   save_res_path: ./output/rec/predicts_srn.txt
 
 
@@ -39,7 +39,7 @@ Architecture:
     name: ResNetFPN
   Head:
     name: SRNHead
-    max_text_length: 25
+    max_text_length: 64
     num_heads: 8
     num_encoder_TUs: 2
     num_decoder_TUs: 4
@@ -58,7 +58,7 @@ Metric:
 Train:
   dataset:
     name: LMDBDataSet
-    data_dir: ./train_data/data_lmdb_release/training/
+    data_dir: ./train_data2/training/
     transforms:
       - DecodeImage: # load image
           img_mode: BGR
@@ -83,7 +83,7 @@ Train:
 Eval:
   dataset:
     name: LMDBDataSet
-    data_dir: ./train_data/data_lmdb_release/validation/
+    data_dir: ./train_data2/validation/
     transforms:
       - DecodeImage: # load image
           img_mode: BGR
@@ -102,5 +102,5 @@ Eval:
   loader:
     shuffle: False
     drop_last: False
-    batch_size_per_card: 32
+    batch_size_per_card: 64
     num_workers: 4
